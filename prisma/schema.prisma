@@ -1,0 +1,22 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model AppAnalysis {
+  id              Int      @id @default(autoincrement())
+  url            String   @unique
+  appName         String
+  score           Int
+  riskLevel       String   
+  countryOfOrigin String
+  shareholders    String[] 
+  positivePoints  String[]
+  negativePoints  String[]
+  summary         String   @db.Text
+  timestamp       DateTime @default(now())
+}
